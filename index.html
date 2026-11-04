@@ -38,8 +38,13 @@
                 <div class="bg-brand-600 text-white p-2 rounded-lg"><i class="fa-solid fa-border-all"></i></div>
                 <h1 class="text-xl font-bold text-slate-900">My Workspace Portal</h1>
             </div>
-            <div class="text-sm text-slate-500">
-                <i class="fa-solid fa-circle-info mr-1"></i> 빈 슬롯에 링크를 드래그 앤 드롭하거나 클릭하세요.
+            <div class="flex items-center gap-4 text-sm text-slate-500">
+                <span class="hidden sm:inline"><i class="fa-solid fa-circle-info mr-1"></i> 빈 슬롯에 링크를 드래그 앤 드롭하거나 클릭하세요.</span>
+                
+                <!-- GitHub 업로드 버튼 추가 -->
+                <button id="github-upload-btn" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-medium transition-colors shadow-sm">
+                    <i class="fa-brands fa-github"></i> GitHub에 저장
+                </button>
             </div>
         </div>
     </header>
@@ -104,6 +109,9 @@
             loadData();
             renderDashboard();
             setupModalEvents();
+            
+            // GitHub 업로드 버튼 이벤트 연결
+            document.getElementById('github-upload-btn').addEventListener('click', uploadToGitHub);
         }
 
         function loadData() {
@@ -210,7 +218,7 @@
                 slot.innerHTML = `
                     <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 rounded-xl"></a>
                     <div class="w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center mb-2 text-brand-600">
-                        <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt="favicon" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMyIDEwIDEwIDEwIDEwLTEwIDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04IDh6Ii8+PC9zdmc+'" />
+                        <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt="favicon" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMy IDEw IDEw IDEw IDEwLTEw IDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04 IDh6Ii8+PC9zdmc+'" />
                     </div>
                     <h3 class="font-semibold text-slate-800 text-sm truncate w-full px-2">${data.title}</h3>
                     <p class="text-xs text-slate-400 truncate w-full px-2 mt-0.5">${domain}</p>
@@ -380,6 +388,80 @@
             inputTitle.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') inputUrl.focus();
             });
+        }
+
+        // ----------------------------------------------------
+        // GitHub Upload Logic
+        // ----------------------------------------------------
+        // ⚠️ 주의: 코드를 공개 저장소에 올릴 때는 토큰이 노출되지 않도록 주의하세요. (개인 로컬 사용 권장)
+        const GITHUB_CONFIG = {
+            token: 'YOUR_GITHUB_TOKEN', // 발급받은 Personal Access Token (repo 권한 필요)
+            owner: 'YOUR_GITHUB_USERNAME', // GitHub 아이디
+            repo: 'YOUR_REPO_NAME',        // 업로드할 저장소 이름
+            path: 'index.html'             // 저장될 파일명 및 경로
+        };
+
+        async function uploadToGitHub() {
+            const btn = document.getElementById('github-upload-btn');
+            
+            if (GITHUB_CONFIG.token === 'YOUR_GITHUB_TOKEN') {
+                alert('스크립트 내 GITHUB_CONFIG 변수에 GitHub 토큰과 저장소 정보를 먼저 입력해주세요.');
+                return;
+            }
+
+            try {
+                // 버튼 상태 변경 (로딩 중)
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 업로드 중...';
+                btn.disabled = true;
+
+                // 1. 현재 HTML 전체 코드 가져오기 (현재 데이터 상태 포함)
+                const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+                
+                // 2. 한글 깨짐 방지를 위한 Base64 인코딩
+                const base64Content = btoa(unescape(encodeURIComponent(htmlContent)));
+
+                // 3. 기존 파일 정보 조회 (파일 덮어쓰기를 위해 SHA 해시값 필요)
+                const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+                let sha = '';
+                
+                const getResponse = await fetch(apiUrl, {
+                    headers: { 'Authorization': `token ${GITHUB_CONFIG.token}` }
+                });
+
+                if (getResponse.ok) {
+                    const fileData = await getResponse.json();
+                    sha = fileData.sha;
+                }
+
+                // 4. GitHub API로 파일 생성 또는 업데이트 요청(PUT)
+                const putResponse = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_CONFIG.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update portal links and settings via Web Dashboard',
+                        content: base64Content,
+                        sha: sha || undefined // 기존 파일이 없으면 undefined
+                    })
+                });
+
+                if (putResponse.ok) {
+                    alert('성공적으로 GitHub에 업로드되었습니다!');
+                } else {
+                    const errorData = await putResponse.json();
+                    alert(`업로드 실패: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('GitHub Upload Error:', error);
+                alert('업로드 중 네트워크 오류가 발생했습니다.');
+            } finally {
+                // 버튼 상태 복구
+                btn.innerHTML = '<i class="fa-brands fa-github"></i> GitHub에 저장';
+                btn.disabled = false;
+            }
         }
 
         // 앱 시작
