@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인화 포털 대시보드 | My Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#eff6ff', 500: '#3b82f6', 600: '#2563eb' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .drag-over {
+            border-color: #3b82f6 !important;
+            background-color: #eff6ff !important;
+            color: #3b82f6 !important;
+        }
+        /* 링크 슬롯 호버 시 애니메이션 */
+        .slot-transition { transition: all 0.2s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="bg-brand-600 text-white p-2 rounded-lg"><i class="fa-solid fa-border-all"></i></div>
+                <h1 class="text-xl font-bold text-slate-900">My Workspace Portal</h1>
+            </div>
+            <div class="text-sm text-slate-500">
+                <i class="fa-solid fa-circle-info mr-1"></i> 빈 슬롯에 링크를 드래그 앤 드롭하거나 클릭하세요.
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <div id="dashboard-container" class="grid grid-cols-1 gap-8">
+            <!-- Categories will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal for Manual Entry -->
+    <div id="link-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity opacity-0">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 transform scale-95 transition-transform duration-200" id="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-slate-900">새 링크 추가</h3>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">사이트 이름 (Title)</label>
+                    <input type="text" id="link-title" placeholder="예: Google" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">URL 주소</label>
+                    <input type="url" id="link-url" placeholder="https://example.com" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end gap-3">
+                <button id="cancel-btn" class="px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg font-medium transition-colors">취소</button>
+                <button id="save-btn" class="px-4 py-2 text-white bg-brand-600 hover:bg-brand-700 rounded-lg font-medium transition-colors shadow-sm">저장하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const SLOTS_PER_CATEGORY = 4;
+        const categories = [
+            { id: 'work', title: 'Work', icon: 'fa-briefcase', color: 'text-blue-600' },
+            { id: 'study', title: 'Study', icon: 'fa-book-open', color: 'text-green-600' },
+            { id: 'entertainment', title: 'Entertainment', icon: 'fa-gamepad', color: 'text-purple-600' },
+            { id: 'misc', title: 'Misc', icon: 'fa-folder-open', color: 'text-orange-600' }
+        ];
+
+        // State Management
+        let portalData = { customTitles: {} };
+        let currentEditInfo = { categoryId: null, slotIndex: null };
+
+        // DOM Elements
+        const container = document.getElementById('dashboard-container');
+        const modal = document.getElementById('link-modal');
+        const modalContent = document.getElementById('modal-content');
+        const inputTitle = document.getElementById('link-title');
+        const inputUrl = document.getElementById('link-url');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const saveBtn = document.getElementById('save-btn');
+
+        // Initialization
+        function init() {
+            loadData();
+            renderDashboard();
+            setupModalEvents();
+        }
+
+        function loadData() {
+            try {
+                const stored = localStorage.getItem('myPortalData');
+                if (stored) {
+                    portalData = JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error("데이터를 불러오는 중 오류 발생", e);
+            }
+
+            if (!portalData.customTitles) {
+                portalData.customTitles = {};
+            }
+
+            // 각 카테고리가 데이터에 없으면 빈 배열로 초기화
+            categories.forEach(cat => {
+                if (!portalData[cat.id] || !Array.isArray(portalData[cat.id])) {
+                    portalData[cat.id] = Array(SLOTS_PER_CATEGORY).fill(null);
+                }
+            });
+        }
+
+        function saveData() {
+            localStorage.setItem('myPortalData', JSON.stringify(portalData));
+        }
+
+        // ----------------------------------------------------
+        // Rendering
+        // ----------------------------------------------------
+        function renderDashboard() {
+            container.innerHTML = ''; // 초기화
+
+            categories.forEach(category => {
+                // Category Section
+                const section = document.createElement('section');
+                section.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6';
+
+                const currentTitle = portalData.customTitles[category.id] || category.title;
+
+                // Category Header
+                const header = document.createElement('div');
+                header.className = 'flex items-center gap-3 mb-6 group';
+                header.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center ${category.color} flex-shrink-0">
+                        <i class="fa-solid ${category.icon} text-lg"></i>
+                    </div>
+                    <div class="flex items-center relative">
+                        <input type="text" 
+                            class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" 
+                            value="${currentTitle}" 
+                            data-cat-id="${category.id}"
+                            placeholder="카테고리 이름"
+                            title="클릭하여 이름 수정"
+                        >
+                        <i class="fa-solid fa-pen text-slate-300 ml-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-sm"></i>
+                    </div>
+                `;
+                section.appendChild(header);
+
+                // 타이틀 수정 이벤트 (change 시 자동 저장)
+                const titleInput = header.querySelector('.category-title-input');
+                titleInput.addEventListener('change', (e) => {
+                    const newTitle = e.target.value.trim();
+                    if (newTitle) {
+                        portalData.customTitles[category.id] = newTitle;
+                    } else {
+                        // 값이 비어있을 경우 기존 디폴트 이름으로 롤백
+                        e.target.value = category.title;
+                        portalData.customTitles[category.id] = category.title;
+                    }
+                    saveData();
+                });
+
+                // Grid Container
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-2 md:grid-cols-4 gap-4';
+
+                // Render Slots
+                const slots = portalData[category.id];
+                for (let i = 0; i < SLOTS_PER_CATEGORY; i++) {
+                    const slotData = slots[i];
+                    const slotEl = createSlotElement(category.id, i, slotData);
+                    grid.appendChild(slotEl);
+                }
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        function createSlotElement(categoryId, slotIndex, data) {
+            const slot = document.createElement('div');
+            
+            if (data) {
+                // 채워진 슬롯
+                slot.className = 'group relative border border-slate-200 bg-slate-50 rounded-xl p-4 flex flex-col justify-center items-center text-center h-28 slot-transition hover:border-brand-300 hover:shadow-md cursor-pointer';
+                
+                // 도메인 추출을 위한 함수
+                let domain = '';
+                try { domain = new URL(data.url).hostname; } catch(e) { domain = data.url; }
+
+                slot.innerHTML = `
+                    <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 rounded-xl"></a>
+                    <div class="w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center mb-2 text-brand-600">
+                        <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt="favicon" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMyIDEwIDEwIDEwIDEwLTEwIDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04IDh6Ii8+PC9zdmc+'" />
+                    </div>
+                    <h3 class="font-semibold text-slate-800 text-sm truncate w-full px-2">${data.title}</h3>
+                    <p class="text-xs text-slate-400 truncate w-full px-2 mt-0.5">${domain}</p>
+                    
+                    <!-- 삭제 버튼 -->
+                    <button class="delete-btn absolute top-2 right-2 w-7 h-7 bg-white text-red-500 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center hover:bg-red-50" data-cat="${categoryId}" data-idx="${slotIndex}">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    </button>
+                `;
+
+                // 삭제 버튼 이벤트
+                const delBtn = slot.querySelector('.delete-btn');
+                delBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    deleteLink(categoryId, slotIndex);
+                });
+
+            } else {
+                // 빈 슬롯
+                slot.className = 'border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition';
+                slot.innerHTML = `
+                    <i class="fa-solid fa-plus text-xl mb-2"></i>
+                    <span class="text-sm font-medium">링크 추가</span>
+                `;
+
+                // 클릭하여 수동 추가
+                slot.addEventListener('click', () => openModal(categoryId, slotIndex));
+
+                // Drag & Drop 이벤트 설정
+                setupDragAndDrop(slot, categoryId, slotIndex);
+            }
+
+            return slot;
+        }
+
+        // ----------------------------------------------------
+        // Drag and Drop Logic
+        // ----------------------------------------------------
+        function setupDragAndDrop(slotEl, categoryId, slotIndex) {
+            slotEl.addEventListener('dragover', (e) => {
+                e.preventDefault(); // 드롭 허용
+                slotEl.classList.add('drag-over');
+            });
+
+            slotEl.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                slotEl.classList.remove('drag-over');
+            });
+
+            slotEl.addEventListener('drop', (e) => {
+                e.preventDefault();
+                slotEl.classList.remove('drag-over');
+
+                // 드롭된 데이터에서 URL 추출
+                let url = e.dataTransfer.getData('text/uri-list');
+                if (!url) {
+                    url = e.dataTransfer.getData('text/plain');
+                }
+                
+                // 첫 번째 줄(URL)만 가져오기 (종종 주석과 함께 복사됨)
+                url = url ? url.split('\n')[0].trim() : '';
+
+                if (isValidUrl(url)) {
+                    // 도메인 이름을 기본 타이틀로 사용
+                    let title = "새 링크";
+                    try { title = new URL(url).hostname.replace('www.', ''); } catch(e){}
+                    
+                    addLink(categoryId, slotIndex, title, url);
+                } else {
+                    alert("유효한 웹사이트 주소가 아닙니다.");
+                }
+            });
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;  
+            }
+        }
+
+        // ----------------------------------------------------
+        // Data Manipulation
+        // ----------------------------------------------------
+        function addLink(categoryId, slotIndex, title, url) {
+            // URL에 프로토콜이 없으면 https 추가
+            if (!/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+
+            portalData[categoryId][slotIndex] = { title, url };
+            saveData();
+            renderDashboard();
+        }
+
+        function deleteLink(categoryId, slotIndex) {
+            portalData[categoryId][slotIndex] = null;
+            saveData();
+            renderDashboard();
+        }
+
+        // ----------------------------------------------------
+        // Modal Logic
+        // ----------------------------------------------------
+        function openModal(categoryId, slotIndex) {
+            currentEditInfo = { categoryId, slotIndex };
+            inputTitle.value = '';
+            inputUrl.value = '';
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // 부드러운 애니메이션
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            inputTitle.focus();
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 200); // tailwind duration-200과 일치
+        }
+
+        function setupModalEvents() {
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // 모달 바깥 배경 클릭 시 닫기
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            saveBtn.addEventListener('click', () => {
+                const title = inputTitle.value.trim();
+                const url = inputUrl.value.trim();
+
+                if (!title || !url) {
+                    alert("이름과 URL 주소를 모두 입력해주세요.");
+                    return;
+                }
+
+                if (!isValidUrl(/^https?:\/\//i.test(url) ? url : 'https://' + url)) {
+                    alert("유효한 URL 형식이 아닙니다.");
+                    return;
+                }
+
+                addLink(currentEditInfo.categoryId, currentEditInfo.slotIndex, title, url);
+                closeModal();
+            });
+
+            // Enter 키 지원
+            inputUrl.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') saveBtn.click();
+            });
+            inputTitle.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') inputUrl.focus();
+            });
+        }
+
+        // 앱 시작
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
