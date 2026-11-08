@@ -311,21 +311,21 @@
         }
 
         // ----------------------------------------------------
-        // 완벽히 수정된 GitHub 업로드 함수
+        // 에러 보완 및 데이터 주입 업로드 로직
         // ----------------------------------------------------
         async function uploadToGitHub() {
             const btn = document.getElementById('github-upload-btn');
             const originalText = '<i class="fa-brands fa-github"></i> GitHub에 저장';
 
             try {
-                // 1. 토큰 가져오기 또는 입력받기
+                // 1. 토큰 입력 받기
                 let token = localStorage.getItem('gh_upload_token');
                 if (!token) {
-                    token = prompt('GitHub Personal Access Token (PAT)을 입력하세요:\n(repo 권한 필수)');
-                    if (!token) return; // 사용자가 취소 시 조용히 복구
+                    token = prompt('GitHub Personal Access Token (PAT)을 입력하세요:\n(권한: repo)');
+                    if (!token || !token.trim()) return; // 입력 취소 시 안전 종료
                     
                     token = token.trim();
-                    if (confirm('이 토큰을 브라우저에 저장하여 계속 사용하시겠습니까?')) {
+                    if (confirm('입력한 토큰을 이 브라우저에 저장하여 사용하시겠습니까?')) {
                         localStorage.setItem('gh_upload_token', token);
                     }
                 }
@@ -334,11 +334,11 @@
                 const repo = 'main';    
                 const path = 'index.html';
 
-                // UI 상태 전환
+                // 로딩 버튼 상태 설정
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 업로드 중...';
                 btn.disabled = true;
 
-                // 2. 최신 데이터(portalData) 소스코드 인젝션
+                // 2. 현재 상태 데이터 (portalData)를 소스코드 내부로 직접 주입
                 let currentHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
                 const dataJsonStr = JSON.stringify(portalData);
                 
@@ -347,11 +347,11 @@
                     `let portalData = ${dataJsonStr};`
                 );
 
-                // 3. UTF-8 안전 Base64 변환
+                // 3. UTF-8 안전 Base64 인코딩
                 const base64Content = btoa(unescape(encodeURIComponent(currentHtml)));
                 const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
-                // 4. SHA 조회
+                // 4. SHA 값 조회
                 let sha = '';
                 const getRes = await fetch(apiUrl, {
                     headers: { 
@@ -364,16 +364,12 @@
                     const fileData = await getRes.json();
                     sha = fileData.sha;
                 } else if (getRes.status === 401) {
-                    alert('❌ 토큰 인증에 실패했습니다 (401). 올바른 토큰을 다시 입력하세요.');
+                    alert('❌ 토큰 인증 실패 (401 오류).\nGitHub 토큰이 올바르지 않거나 만료되었습니다. 다시 발급받아 입력해주세요.');
                     localStorage.removeItem('gh_upload_token');
-                    return;
-                } else if (getRes.status !== 404) {
-                    const errData = await getRes.json();
-                    alert(`❌ 기존 파일 정보 조회 실패 (${getRes.status}): ${errData.message}`);
                     return;
                 }
 
-                // 5. GitHub API PUT (덮어쓰기 요청)
+                // 5. GitHub API PUT 요청
                 const putRes = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
@@ -389,7 +385,7 @@
                 });
 
                 if (putRes.ok) {
-                    alert('✅ 성공적으로 GitHub 저장소 파일에 동기화되었습니다!');
+                    alert('✅ 성공적으로 GitHub 저장소에 저장되었습니다!');
                 } else {
                     const errData = await putRes.json();
                     alert(`❌ 업로드 실패 (${putRes.status}): ${errData.message}`);
@@ -399,7 +395,7 @@
                 console.error('GitHub Upload Error:', err);
                 alert('⚠️ 통신 중 오류가 발생했습니다.');
             } finally {
-                // 성공/실패/취소 등 어떤 상황에서도 버튼 상태를 100% 무조건 원래대로 복구
+                // 성공, 실패, 취소 상관없이 버튼은 원래 상태로 반환
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
