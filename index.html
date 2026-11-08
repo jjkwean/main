@@ -75,17 +75,9 @@
                         <input type="text" class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" value="Study" data-cat-id="study" placeholder="카테고리 이름" title="클릭하여 이름 수정">
                         <i class="fa-solid fa-pen text-slate-300 ml-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-sm"></i>
                     </div>
-                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="group relative border border-slate-200 bg-slate-50 rounded-xl p-4 flex flex-col justify-center items-center text-center h-28 slot-transition hover:border-brand-300 hover:shadow-md cursor-pointer">
-                    <a href="https://jjkwean.github.io/math_middle_one/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 rounded-xl"></a>
-                    <div class="w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center mb-2 text-brand-600">
-                        <img src="https://www.google.com/s2/favicons?domain=jjkwean.github.io&amp;sz=32" alt="favicon" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMy IDEw IDEw IDEw IDEwIDEwLTEw IDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04 IDh6Ii8+PC9zdmc+'">
-                    </div>
-                    <h3 class="font-semibold text-slate-800 text-sm truncate w-full px-2">https://jjkwean.github.io/math_middle_one/</h3>
-                    <p class="text-xs text-slate-400 truncate w-full px-2 mt-0.5">jjkwean.github.io</p>
-                    
-                    <button class="delete-btn absolute top-2 right-2 w-7 h-7 bg-white text-red-500 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center hover:bg-red-50">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
+                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition">
+                    <i class="fa-solid fa-plus text-xl mb-2"></i>
+                    <span class="text-sm font-medium">링크 추가</span>
                 </div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition">
                     <i class="fa-solid fa-plus text-xl mb-2"></i>
                     <span class="text-sm font-medium">링크 추가</span>
@@ -171,7 +163,7 @@
             { id: 'misc', title: 'Misc', icon: 'fa-folder-open', color: 'text-orange-600' }
         ];
 
-        let portalData = {"customTitles":{},"work":[null,null,null,null],"study":[{"title":"https://jjkwean.github.io/math_middle_one/","url":"https://jjkwean.github.io/math_middle_one/"},null,null,null],"entertainment":[null,null,null,null],"misc":[null,null,null,null]};
+        let portalData = {"customTitles":{},"work":[null,null,null,null],"study":[null,null,null,null],"entertainment":[null,null,null,null],"misc":[null,null,null,null]};
         let currentEditInfo = { categoryId: null, slotIndex: null };
 
         const container = document.getElementById('dashboard-container');
