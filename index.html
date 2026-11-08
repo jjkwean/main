@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko"><head>
+<html lang="ko">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>개인화 포털 대시보드 | My Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -24,9 +25,10 @@
             background-color: #eff6ff !important;
             color: #3b82f6 !important;
         }
+        /* 링크 슬롯 호버 시 애니메이션 */
         .slot-transition { transition: all 0.2s ease-in-out; }
     </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Noto Sans KR", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.right-2{right:0.5rem}.top-2{top:0.5rem}.z-40{z-index:40}.z-50{z-index:50}.z-10{z-index:10}.z-20{z-index:20}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-4{margin-bottom:1rem}.mr-1{margin-right:0.25rem}.mt-6{margin-top:1.5rem}.mb-2{margin-bottom:0.5rem}.mb-6{margin-bottom:1.5rem}.mt-0\.5{margin-top:0.125rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-10{height:2.5rem}.h-28{height:7rem}.h-5{height:1.25rem}.h-7{height:1.75rem}.min-h-screen{min-height:100vh}.w-full{width:100%}.w-10{width:2.5rem}.w-5{width:1.25rem}.w-7{width:1.75rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.max-w-\[250px\]{max-width:250px}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.scale-95{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.cursor-text{cursor:text}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-8{gap:2rem}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-lg{border-radius:0.5rem}.rounded{border-radius:0.25rem}.rounded-xl{border-radius:0.75rem}.rounded-full{border-radius:9999px}.rounded-sm{border-radius:0.125rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-dashed{border-style:dashed}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-brand-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.p-2{padding:0.5rem}.p-6{padding:1.5rem}.p-4{padding:1rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.text-center{text-align:center}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-orange-600{--tw-text-opacity:1;color:rgb(234 88 12 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-brand-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.hover\:border-slate-300:hover{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-brand-50:hover{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.hover\:bg-red-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.hover\:text-brand-500:hover{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.hover\:shadow-md:hover{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:border-brand-500:focus{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.focus\:bg-slate-50:focus{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-brand-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(59 130 246 / var(--tw-ring-opacity, 1))}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:inline{display:inline}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}@media (min-width: 768px){.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+</head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
 
     <!-- Header -->
@@ -40,57 +42,23 @@
                 <span class="hidden sm:inline"><i class="fa-solid fa-circle-info mr-1"></i> 빈 슬롯에 링크를 드래그 앤 드롭하거나 클릭하세요.</span>
                 
                 <!-- GitHub 업로드 버튼 -->
-                <button id="github-upload-btn" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-medium transition-colors shadow-sm" disabled=""><i class="fa-solid fa-spinner fa-spin"></i> 업로드 중...</button>
+                <button id="github-upload-btn" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg font-medium transition-colors shadow-sm">
+                    <i class="fa-brands fa-github"></i> GitHub에 저장
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Main Dashboard -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div id="dashboard-container" class="grid grid-cols-1 gap-8"><section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6"><div class="flex items-center gap-3 mb-6 group">
-                    <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-blue-600 flex-shrink-0">
-                        <i class="fa-solid fa-briefcase text-lg"></i>
-                    </div>
-                    <div class="flex items-center relative">
-                        <input type="text" class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" value="Work" data-cat-id="work">
-                    </div>
-                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div></div></section><section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6"><div class="flex items-center gap-3 mb-6 group">
-                    <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-green-600 flex-shrink-0">
-                        <i class="fa-solid fa-book-open text-lg"></i>
-                    </div>
-                    <div class="flex items-center relative">
-                        <input type="text" class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" value="Study" data-cat-id="study">
-                    </div>
-                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="group relative border border-slate-200 bg-slate-50 rounded-xl p-4 flex flex-col justify-center items-center text-center h-28 slot-transition hover:border-brand-300 hover:shadow-md cursor-pointer">
-                    <a href="https://jjkwean.github.io/math_middle_one/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 rounded-xl"></a>
-                    <div class="w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center mb-2 text-brand-600">
-                        <img src="https://www.google.com/s2/favicons?domain=jjkwean.github.io&amp;sz=32" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMy IDEw IDEw IDEw IDEwIDEwLTEw IDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04 IDh6Ii8+PC9zdmc+'">
-                    </div>
-                    <h3 class="font-semibold text-slate-800 text-sm truncate w-full px-2">https://jjkwean.github.io/math_middle_one/</h3>
-                    <p class="text-xs text-slate-400 truncate w-full px-2 mt-0.5">jjkwean.github.io</p>
-                    <button class="delete-btn absolute top-2 right-2 w-7 h-7 bg-white text-red-500 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center hover:bg-red-50">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                </div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div></div></section><section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6"><div class="flex items-center gap-3 mb-6 group">
-                    <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-purple-600 flex-shrink-0">
-                        <i class="fa-solid fa-gamepad text-lg"></i>
-                    </div>
-                    <div class="flex items-center relative">
-                        <input type="text" class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" value="Entertainment" data-cat-id="entertainment">
-                    </div>
-                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div></div></section><section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6"><div class="flex items-center gap-3 mb-6 group">
-                    <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-orange-600 flex-shrink-0">
-                        <i class="fa-solid fa-folder-open text-lg"></i>
-                    </div>
-                    <div class="flex items-center relative">
-                        <input type="text" class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" value="Misc" data-cat-id="misc">
-                    </div>
-                </div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div><div class="border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition"><i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span></div></div></section></div>
+        <div id="dashboard-container" class="grid grid-cols-1 gap-8">
+            <!-- Categories will be injected here by JavaScript -->
+        </div>
     </main>
 
-    <!-- Modal -->
-    <div id="link-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm items-center justify-center z-50 transition-opacity opacity-0 hidden">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 transform transition-transform duration-200 scale-95" id="modal-content">
+    <!-- Modal for Manual Entry -->
+    <div id="link-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity opacity-0">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 transform scale-95 transition-transform duration-200" id="modal-content">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-bold text-slate-900">새 링크 추가</h3>
                 <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -113,6 +81,7 @@
     </div>
 
     <script>
+        // Configuration
         const SLOTS_PER_CATEGORY = 4;
         const categories = [
             { id: 'work', title: 'Work', icon: 'fa-briefcase', color: 'text-blue-600' },
@@ -121,9 +90,11 @@
             { id: 'misc', title: 'Misc', icon: 'fa-folder-open', color: 'text-orange-600' }
         ];
 
-        let portalData = {"customTitles":{"study":"math"},"work":[null,null,null,null],"study":[{"title":"https://jjkwean.github.io/math_middle_one/","url":"https://jjkwean.github.io/math_middle_one/"},null,null,null],"entertainment":[null,null,null,null],"misc":[null,null,null,null]};
+        // State Management
+        let portalData = { customTitles: {} };
         let currentEditInfo = { categoryId: null, slotIndex: null };
 
+        // DOM Elements
         const container = document.getElementById('dashboard-container');
         const modal = document.getElementById('link-modal');
         const modalContent = document.getElementById('modal-content');
@@ -133,22 +104,29 @@
         const cancelBtn = document.getElementById('cancel-btn');
         const saveBtn = document.getElementById('save-btn');
 
+        // Initialization
         function init() {
             loadData();
             renderDashboard();
             setupModalEvents();
+            
+            // GitHub 업로드 버튼 이벤트 연결
             document.getElementById('github-upload-btn').addEventListener('click', uploadToGitHub);
         }
 
         function loadData() {
             try {
                 const stored = localStorage.getItem('myPortalData');
-                if (stored) portalData = JSON.parse(stored);
+                if (stored) {
+                    portalData = JSON.parse(stored);
+                }
             } catch (e) {
-                console.error("데이터 불러오기 실패", e);
+                console.error("데이터를 불러오는 중 오류 발생", e);
             }
 
-            if (!portalData.customTitles) portalData.customTitles = {};
+            if (!portalData.customTitles) {
+                portalData.customTitles = {};
+            }
 
             categories.forEach(cat => {
                 if (!portalData[cat.id] || !Array.isArray(portalData[cat.id])) {
@@ -161,8 +139,12 @@
             localStorage.setItem('myPortalData', JSON.stringify(portalData));
         }
 
+        // ----------------------------------------------------
+        // Rendering
+        // ----------------------------------------------------
         function renderDashboard() {
             container.innerHTML = '';
+
             categories.forEach(category => {
                 const section = document.createElement('section');
                 section.className = 'bg-white rounded-2xl shadow-sm border border-slate-200 p-6';
@@ -179,7 +161,11 @@
                         <input type="text" 
                             class="category-title-input text-xl font-bold text-slate-800 bg-transparent border-b-2 border-transparent hover:border-slate-300 focus:border-brand-500 focus:bg-slate-50 outline-none w-full max-w-[250px] px-1 py-0.5 rounded transition-colors cursor-text" 
                             value="${currentTitle}" 
-                            data-cat-id="${category.id}">
+                            data-cat-id="${category.id}"
+                            placeholder="카테고리 이름"
+                            title="클릭하여 이름 수정"
+                        >
+                        <i class="fa-solid fa-pen text-slate-300 ml-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-sm"></i>
                     </div>
                 `;
                 section.appendChild(header);
@@ -187,7 +173,12 @@
                 const titleInput = header.querySelector('.category-title-input');
                 titleInput.addEventListener('change', (e) => {
                     const newTitle = e.target.value.trim();
-                    portalData.customTitles[category.id] = newTitle || category.title;
+                    if (newTitle) {
+                        portalData.customTitles[category.id] = newTitle;
+                    } else {
+                        e.target.value = category.title;
+                        portalData.customTitles[category.id] = category.title;
+                    }
                     saveData();
                 });
 
@@ -196,7 +187,9 @@
 
                 const slots = portalData[category.id];
                 for (let i = 0; i < SLOTS_PER_CATEGORY; i++) {
-                    grid.appendChild(createSlotElement(category.id, i, slots[i]));
+                    const slotData = slots[i];
+                    const slotEl = createSlotElement(category.id, i, slotData);
+                    grid.appendChild(slotEl);
                 }
 
                 section.appendChild(grid);
@@ -206,44 +199,70 @@
 
         function createSlotElement(categoryId, slotIndex, data) {
             const slot = document.createElement('div');
+            
             if (data) {
                 slot.className = 'group relative border border-slate-200 bg-slate-50 rounded-xl p-4 flex flex-col justify-center items-center text-center h-28 slot-transition hover:border-brand-300 hover:shadow-md cursor-pointer';
+                
                 let domain = '';
                 try { domain = new URL(data.url).hostname; } catch(e) { domain = data.url; }
 
                 slot.innerHTML = `
                     <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 rounded-xl"></a>
                     <div class="w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center mb-2 text-brand-600">
-                        <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMy IDEw IDEw IDEw IDEwIDEwLTEw IDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04 IDh6Ii8+PC9zdmc+'" />
+                        <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt="favicon" class="w-5 h-5 rounded-sm" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NiZDVlMSI+PHBhdGggZD0iTTEyIDJDMiAyIDIgMTIgMiAxMnMy IDEw IDEw IDEw IDEwIDEwLTEw IDEwLTEwUzIyIDIgMTIgMnptMCAxOGMtNC40MSAwLTgtMy41OS04LThzMy41OS04IDgtOCA4IDMuNTkgOCA4LTMuNTkgOC04 IDh6Ii8+PC9zdmc+'" />
                     </div>
                     <h3 class="font-semibold text-slate-800 text-sm truncate w-full px-2">${data.title}</h3>
                     <p class="text-xs text-slate-400 truncate w-full px-2 mt-0.5">${domain}</p>
-                    <button class="delete-btn absolute top-2 right-2 w-7 h-7 bg-white text-red-500 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center hover:bg-red-50">
+                    
+                    <button class="delete-btn absolute top-2 right-2 w-7 h-7 bg-white text-red-500 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center hover:bg-red-50" data-cat="${categoryId}" data-idx="${slotIndex}">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                 `;
 
-                slot.querySelector('.delete-btn').addEventListener('click', (e) => {
+                const delBtn = slot.querySelector('.delete-btn');
+                delBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     deleteLink(categoryId, slotIndex);
                 });
+
             } else {
                 slot.className = 'border-2 border-dashed border-slate-300 hover:border-brand-400 bg-white rounded-xl flex flex-col justify-center items-center h-28 cursor-pointer text-slate-400 hover:text-brand-500 hover:bg-brand-50 slot-transition';
-                slot.innerHTML = `<i class="fa-solid fa-plus text-xl mb-2"></i><span class="text-sm font-medium">링크 추가</span>`;
+                slot.innerHTML = `
+                    <i class="fa-solid fa-plus text-xl mb-2"></i>
+                    <span class="text-sm font-medium">링크 추가</span>
+                `;
+
                 slot.addEventListener('click', () => openModal(categoryId, slotIndex));
                 setupDragAndDrop(slot, categoryId, slotIndex);
             }
+
             return slot;
         }
 
+        // ----------------------------------------------------
+        // Drag and Drop Logic
+        // ----------------------------------------------------
         function setupDragAndDrop(slotEl, categoryId, slotIndex) {
-            slotEl.addEventListener('dragover', (e) => { e.preventDefault(); slotEl.classList.add('drag-over'); });
-            slotEl.addEventListener('dragleave', (e) => { e.preventDefault(); slotEl.classList.remove('drag-over'); });
+            slotEl.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                slotEl.classList.add('drag-over');
+            });
+
+            slotEl.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                slotEl.classList.remove('drag-over');
+            });
+
             slotEl.addEventListener('drop', (e) => {
                 e.preventDefault();
                 slotEl.classList.remove('drag-over');
-                let url = e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text/plain');
+
+                let url = e.dataTransfer.getData('text/uri-list');
+                if (!url) {
+                    url = e.dataTransfer.getData('text/plain');
+                }
+                
                 url = url ? url.split('\n')[0].trim() : '';
 
                 if (isValidUrl(url)) {
@@ -251,17 +270,28 @@
                     try { title = new URL(url).hostname.replace('www.', ''); } catch(e){}
                     addLink(categoryId, slotIndex, title, url);
                 } else {
-                    alert("유효한 URL 주소가 아닙니다.");
+                    alert("유효한 웹사이트 주소가 아닙니다.");
                 }
             });
         }
 
         function isValidUrl(string) {
-            try { new URL(string); return true; } catch (_) { return false; }
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;  
+            }
         }
 
+        // ----------------------------------------------------
+        // Data Manipulation
+        // ----------------------------------------------------
         function addLink(categoryId, slotIndex, title, url) {
-            if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+            if (!/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+
             portalData[categoryId][slotIndex] = { title, url };
             saveData();
             renderDashboard();
@@ -273,10 +303,14 @@
             renderDashboard();
         }
 
+        // ----------------------------------------------------
+        // Modal Logic
+        // ----------------------------------------------------
         function openModal(categoryId, slotIndex) {
             currentEditInfo = { categoryId, slotIndex };
             inputTitle.value = '';
             inputUrl.value = '';
+            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => {
@@ -284,6 +318,7 @@
                 modalContent.classList.remove('scale-95');
                 modalContent.classList.add('scale-100');
             }, 10);
+            
             inputTitle.focus();
         }
 
@@ -291,6 +326,7 @@
             modal.classList.add('opacity-0');
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
+            
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
@@ -300,42 +336,65 @@
         function setupModalEvents() {
             closeBtn.addEventListener('click', closeModal);
             cancelBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
 
             saveBtn.addEventListener('click', () => {
                 const title = inputTitle.value.trim();
                 const url = inputUrl.value.trim();
-                if (!title || !url) return alert("이름과 URL 주소를 모두 입력해주세요.");
-                addLink(currentEditInfo.categoryId, currentEditInfo.slotIndex, title, /^https?:\/\//i.test(url) ? url : 'https://' + url);
+
+                if (!title || !url) {
+                    alert("이름과 URL 주소를 모두 입력해주세요.");
+                    return;
+                }
+
+                if (!isValidUrl(/^https?:\/\//i.test(url) ? url : 'https://' + url)) {
+                    alert("유효한 URL 형식이 아닙니다.");
+                    return;
+                }
+
+                addLink(currentEditInfo.categoryId, currentEditInfo.slotIndex, title, url);
                 closeModal();
+            });
+
+            inputUrl.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') saveBtn.click();
+            });
+            inputTitle.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') inputUrl.focus();
             });
         }
 
         // ----------------------------------------------------
-        // 수정 완료된 GitHub 업로드 로직
+        // GitHub Upload Logic (안전 및 에러 방지 완벽 처리)
         // ----------------------------------------------------
         async function uploadToGitHub() {
+            const btn = document.getElementById('github-upload-btn');
+            const originalText = '<i class="fa-brands fa-github"></i> GitHub에 저장';
+
+            // 1. 토큰 취득 (기존 저장값 확인 또는 사용자 입력 받기)
             let token = localStorage.getItem('gh_upload_token');
             if (!token) {
                 token = prompt('GitHub Personal Access Token (PAT)을 입력하세요:');
-                if (!token) return;
-                if (confirm('이 토큰을 브라우저에 기억하시겠습니까?')) {
+                if (!token) return; // 프롬프트 취소 시 중단
+                
+                if (confirm('이 토큰을 브라우저에 저장하시겠습니까?\n(공용 PC에서는 취소를 누르세요)')) {
                     localStorage.setItem('gh_upload_token', token.trim());
                 }
             }
 
-            const owner = 'jjkwean';
-            const repo = 'main';
+            const owner = 'jjkwean'; // 사용자의 GitHub 아이디
+            const repo = 'main';    // 저장소 이름
             const path = 'index.html';
 
-            const btn = document.getElementById('github-upload-btn');
-            const originalHTML = btn.innerHTML;
-
             try {
+                // UI 로딩 시작
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 업로드 중...';
                 btn.disabled = true;
 
-                // 1. 현재 로컬스토리지 데이터를 HTML 소스 코드에 주입
+                // 2. 현재 상태 데이터 반영 HTML 구성
                 let currentHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
                 const dataJsonStr = JSON.stringify(portalData);
                 
@@ -344,57 +403,62 @@
                     `let portalData = ${dataJsonStr};`
                 );
 
-                // 2. Base64 인코딩
+                // 3. UTF-8 대응 Base64 인코딩
                 const base64Content = btoa(unescape(encodeURIComponent(currentHtml)));
                 const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
-                // 3. SHA 값 가져오기
+                // 4. SHA 값 가져오기 (기존 파일 덮어쓰기용)
                 let sha = '';
                 const getRes = await fetch(apiUrl, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 
+                        'Authorization': `Bearer ${token.trim()}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
                 });
 
                 if (getRes.ok) {
                     const fileData = await getRes.json();
                     sha = fileData.sha;
                 } else if (getRes.status === 401) {
-                    alert('토큰 정보가 유효하지 않습니다. 다시 입력해 주세요.');
+                    alert('❌ 토큰 인증에 실패했습니다 (401). 토큰을 다시 발급받아 입력해 주세요.');
                     localStorage.removeItem('gh_upload_token');
                     return;
                 }
 
-                // 4. GitHub API PUT 요청 (커밋)
+                // 5. GitHub API 파일 PUT 커밋 요청
                 const putRes = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
+                        'Authorization': `Bearer ${token.trim()}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
                     },
                     body: JSON.stringify({
-                        message: 'Update portal links',
+                        message: 'chore: Update portal dashboard and items',
                         content: base64Content,
                         sha: sha || undefined
                     })
                 });
 
                 if (putRes.ok) {
-                    alert('✅ 성공적으로 저장소에 업로드되었습니다!');
+                    alert('✅ 성공적으로 GitHub 저장소에 업로드되었습니다!');
                 } else {
                     const errData = await putRes.json();
-                    alert(`❌ 업로드 실패: ${errData.message}`);
+                    alert(`❌ 업로드 실패 (${putRes.status}): ${errData.message}`);
                 }
 
             } catch (err) {
-                console.error(err);
+                console.error('GitHub Upload Error:', err);
                 alert('⚠️ 네트워크 통신 중 오류가 발생했습니다.');
             } finally {
-                // 어떤 상황에서도 버튼 상태 원복
-                btn.innerHTML = originalHTML;
+                // 어떤 오류가 나도 무조건 버튼 원래대로 복구
+                btn.innerHTML = originalText;
                 btn.disabled = false;
             }
         }
 
+        // 앱 시작
         document.addEventListener('DOMContentLoaded', init);
     </script>
-
-</body></html>
+</body>
+</html>
